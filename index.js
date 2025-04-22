@@ -16,8 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
     const addButton = document.querySelector('.add-button');
     let beverageCounter = 1;
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteButton.className = 'delete-button';
         deleteButton.innerHTML = '×';
 
-        deleteButton.addEventListener('click', function() {
+        deleteButton.addEventListener('click', function () {
             const allBeverages = document.querySelectorAll('.beverage');
             if (allBeverages.length > 1) {
                 fieldset.remove();
@@ -51,11 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const initialBeverage = document.querySelector('.beverage');
     addDeleteButton(initialBeverage);
 
-    addButton.addEventListener('click', function() {
+    addButton.addEventListener('click', function () {
         const newBeverage = initialBeverage.cloneNode(true);
 
-        newBeverage.querySelector('.beverage-count').textContent = `Напиток №${beverageCounter}`;
-        beverageCounter++;
+        const allBeverages = document.querySelectorAll('.beverage');
+        beverageCounter = allBeverages.length + 1;
+
+        newBeverage.querySelector('.beverage-count').textContent = `Напиток №${allBeverages.length + 1}`;
 
         const select = newBeverage.querySelector('select');
         select.selectedIndex = 1;
@@ -73,32 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addDeleteButton(newBeverage);
 
         form.insertBefore(newBeverage, addButton.parentElement);
-    });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-    const addButton = document.querySelector('.add-button');
-
-    let beverageCounter = 1;
-
-    addButton.addEventListener('click', () => {
-        beverageCounter++;
-
-        const newBeverageForm = document.querySelector('.beverage').cloneNode(true);
-
-        newBeverageForm.querySelector('.beverage-count').textContent = `Напиток №${beverageCounter}`;
-
-        const radioButtons = newBeverageForm.querySelectorAll('input[type="radio"]');
-        radioButtons.forEach(button => {
-            button.name = `milk-${beverageCounter}`;
-        });
-
-        const checkboxes = newBeverageForm.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.name = `options-${beverageCounter}`;
-        });
-
-        const form = document.querySelector('form');
-        form.insertBefore(newBeverageForm, addButton.parentElement);
+        updateBeverageNumbers();
     });
 });

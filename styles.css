@@ -45,3 +45,16 @@
     border-radius: 5px;
 }
 
+fieldset {
+    position: relative;
+}
+
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
